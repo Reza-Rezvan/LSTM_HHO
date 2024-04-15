@@ -13,7 +13,7 @@ import time
 from numpy import array 
 from tensorflow.keras.layers import Dense, Activation, LSTM, GRU, SimpleRNN, Conv1D, TimeDistributed, MaxPooling1D, Flatten, Dropout
 
-# Load your dataset (adjust the path as needed)
+# Load dataset 
 data = pd.read_csv('Data/Data_AMU.csv')
 data['Time'] = pd.to_datetime(data['Time'])
 data.set_index('Time', inplace=True)
@@ -22,7 +22,7 @@ feature_columns = ['Demand', 'PV_Solar', 'AirTemp', 'CloudOpacity', 'SurfacePres
 scaler = MinMaxScaler()
 data[feature_columns] = scaler.fit_transform(data[feature_columns])
 
-# Assume create_sequences is defined here (as per your initial code snippet)
+# create_sequences 
 def create_sequences(data, feature_columns, n_steps):
     X, y = [], []
     for i in range(len(data) - n_steps):
@@ -45,13 +45,7 @@ def lstm_model_performance(hyperparameters):
     lstm_units = max(1, int(hyperparameters[0]))  # Ensure lstm_units is at least 1
     batch_size = max(1, int(hyperparameters[1]))  # Ensure batch_size is at least 1
     
-    #sample 1
-    # model = Sequential()
-    # model.add(LSTM(lstm_units, activation='relu', input_shape=(n_steps, len(feature_columns))))
-    # model.add(Dense(1))
-    # model.compile(optimizer='adam', loss='mse')
-
-    # Define and compile the LSTM model
+    # compile the LSTM model
     model = Sequential()
     model.add(TimeDistributed(Conv1D(filters=8, kernel_size=2, activation='relu', padding='same'), batch_input_shape=(None, None, 4, 18)))
     model.add(TimeDistributed(MaxPooling1D(pool_size=2)))
@@ -60,7 +54,7 @@ def lstm_model_performance(hyperparameters):
     
     model.add(Dense(units=7))
     model.compile(loss='mae', optimizer='adam', metrics=['mse'])
-    # Train and evaluate the model, handling exceptions for invalid configurations
+    # Train 
     try:
         history = model.fit(X_train, y_train, epochs=3, batch_size=batch_size, validation_data=(X_val, y_val), verbose=0)
         val_loss = model.evaluate(X_val, y_val, verbose=0)
@@ -109,7 +103,7 @@ def HHO(objf,lb,ub,dim,SearchAgents_no,Max_iter):
         for i in range(0,SearchAgents_no):
             E0=2*random.random()-1;  # -1<E0<1
             Escaping_Energy=E1*(E0)  # escaping energy of rabbit Eq. (3) in the paper
-            # -------- Exploration phase Eq. (1) in paper -------------------
+           
             if abs(Escaping_Energy)>=1:
                 #Harris' hawks perch randomly based on 2 strategy:
                 q = random.random()
@@ -204,18 +198,9 @@ print(f"Best Validation Loss: {best_solution.best}")
 #plot
 import matplotlib.pyplot as plt
 
-# Assuming `X_test` and `y_test` are your test data and actual values
-
-# Retrain your model with the best hyperparameters
+# Retrain model with the best hyperparameters
 best_lstm_units = int(best_solution.bestIndividual[0])
 best_batch_size = int(best_solution.bestIndividual[1])
-
-#sample 1
-# model = Sequential()
-# model.add(LSTM(best_lstm_units, activation='relu', input_shape=(n_steps, len(feature_columns))))
-# model.add(Dense(1))
-# model.compile(optimizer='adam', loss='mse')
-
 
 model = Sequential()
 model.add(TimeDistributed(Conv1D(filters=8, kernel_size=2, activation='relu', padding='same'), batch_input_shape=(None, None, 4, 18)))
@@ -226,7 +211,7 @@ model.add(TimeDistributed(Flatten()))
 model.add(Dense(units=7))
 model.compile(loss='mae', optimizer='adam', metrics=['mse'])
 
-# Fit model (consider adjusting epochs based on your earlier findings)
+# Fit model 
 model.fit(X_train, y_train, epochs=3, batch_size=best_batch_size, verbose=0)
 
 # Generate predictions
@@ -241,15 +226,6 @@ plt.xlabel('Time Steps')
 plt.ylabel('Values')
 plt.legend()
 plt.show()
-
-
-# #plot 2
-
-# Import necessary libraries for plotting
-import matplotlib.pyplot as plt
-
-# Assuming your HHO function and lstm_model_performance function remain unchanged, 
-# and best_solution contains the optimal hyperparameters
 
 # Train the best model with optimal hyperparameters
 lstm_units = int(best_solution.bestIndividual[0])
