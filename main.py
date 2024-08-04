@@ -14,11 +14,11 @@ from numpy import array
 from tensorflow.keras.layers import Dense, Activation, LSTM, GRU, SimpleRNN, Conv1D, TimeDistributed, MaxPooling1D, Flatten, Dropout
 
 # Load dataset 
-data = pd.read_csv('Data/Data_AMU.csv')
+data = pd.read_csv('your data path')
 data['Time'] = pd.to_datetime(data['Time'])
 data.set_index('Time', inplace=True)
 
-feature_columns = ['Demand', 'PV_Solar', 'AirTemp', 'CloudOpacity', 'SurfacePressure', 'WindDirection10m', 'WindSpeed10m']
+feature_columns = ['your data columns']
 scaler = MinMaxScaler()
 data[feature_columns] = scaler.fit_transform(data[feature_columns])
 
@@ -29,7 +29,7 @@ def create_sequences(data, feature_columns, n_steps):
         # Extract the sequence of features from the current index to the next n_steps
         X.append(data[feature_columns].iloc[i:i+n_steps].values)
         # Append the target variable (Demand) at the next time step
-        y.append(data['Demand'].iloc[i + n_steps])
+        y.append(data['column as target'].iloc[i + n_steps])
     return np.array(X), np.array(y)
 
 n_steps = 60
