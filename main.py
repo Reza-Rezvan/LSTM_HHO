@@ -15,8 +15,8 @@ from tensorflow.keras.layers import Dense, Activation, LSTM, GRU, SimpleRNN, Con
 
 # Load dataset 
 data = pd.read_csv('your data path')
-data['Time'] = pd.to_datetime(data['Time'])
-data.set_index('Time', inplace=True)
+data['your time coulumn name'] = pd.to_datetime(data['Time'])
+data.set_index('your time coulumn name', inplace=True)
 
 feature_columns = ['your data columns']
 scaler = MinMaxScaler()
