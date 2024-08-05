@@ -34,3 +34,9 @@ To set up the environment for this project, follow these steps:
    ```bash
    git clone https://github.com/your-username/your-repo-name.git
    cd your-repo-name
+
+2. **Create a virtual environment (optional but recommended):**:
+   python -m venv env
+   source env/bin/activate  # On Windows use `env\Scripts\activate`
+3. **install the required packages:**:
+   pip install -r requirements.txt
