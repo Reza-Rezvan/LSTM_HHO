@@ -42,3 +42,38 @@ To set up the environment for this project, follow these steps:
 4. **install the required packages:**
    ```bash
    pip install -r requirements.txt
+
+## Usage
+
+To use this code with your own dataset, perform the following steps:
+
+1. **Prepare your dataset**:
+   - Ensure your CSV file has a `datetime` column and relevant feature and target variable columns.
+   - Place your CSV file in the appropriate directory and note its path.
+
+2. **Modify the `main.py` script**:
+   - Update the path to your CSV file:
+     ```python
+     data = pd.read_csv('path/to/your/dataset.csv')
+     ```
+   - Set the `datetime` column as the index:
+     ```python
+     data['datetime'] = pd.to_datetime(data['datetime'])
+     data.set_index('datetime', inplace=True)
+     ```
+   - Specify your feature columns and target variable:
+     ```python
+     feature_columns = ['YourFeature1', 'YourFeature2', ...]
+     target_column = 'YourTargetVariable'
+     ```
+   - Ensure the target column is correctly specified in the `create_sequences` function:
+     ```python
+     y.append(data[target_column].iloc[i + n_steps])
+     ```
+
+3. **Run the script**:
+   ```bash
+   python main.py
+4. **Check the output**:
+
+   The script will output the best hyperparameters found by the HHO algorithm and display a plot comparing actual vs. predicted values.
