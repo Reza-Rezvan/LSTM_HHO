@@ -8,9 +8,7 @@ This repository provides a framework for using an LSTM (Long Short-Term Memory) 
 - [Dataset](#dataset)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Results](#results)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Project Description
 
