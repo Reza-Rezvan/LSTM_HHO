@@ -30,8 +30,8 @@ To set up the environment for this project, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/Reza-Rezvan/LSTM_HHO.git
+   cd LSTM_HHO
 
 2. **Create a virtual environment (optional but recommended):**
    ```bash
