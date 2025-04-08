@@ -77,4 +77,4 @@ To use this code with your own dataset, perform the following steps:
    The script will output the best hyperparameters found by the HHO algorithm and display a plot comparing actual vs. predicted values.
 
 ## UPDATE
-New main added (Main_v1.1.0)
+New main added (Main_v1.1.0) and Solution updated.
